@@ -46,29 +46,29 @@
               pkgs.nerd-fonts.jetbrains-mono
             ];
 
-#         system.activationScripts.applications.text = let
-#         systemPackages = [
-#                 pkgs.alacritty
-#     pkgs.mkalias
-#   ];
-#         env = pkgs.buildEnv {
-#           name = "system-applications";
-#           paths = systemPackages;
-#           pathsToLink = "/Applications";
-#         };
-#       in
-#         pkgs.lib.mkForce ''
-#           # Set up applications.
-#           echo "setting up /Applications..." >&2
-#           rm -rf /Applications/Nix\ Apps
-#           mkdir -p /Applications/Nix\ Apps
-# find ${env}/Applications -maxdepth 1 -type l -exec readlink '{}' + |
-# while IFS= read -r src; do
-#   app_name=$(basename "$src")
-#   echo "Copying $src" >&2
-#   ${pkgs.mkalias}/bin/mkalias "$src" "/Applications/Nix Apps/$app_name"
-# done
-#         '';
+            #         system.activationScripts.applications.text = let
+            #         systemPackages = [
+            #                 pkgs.alacritty
+            #     pkgs.mkalias
+            #   ];
+            #         env = pkgs.buildEnv {
+            #           name = "system-applications";
+            #           paths = systemPackages;
+            #           pathsToLink = "/Applications";
+            #         };
+            #       in
+            #         pkgs.lib.mkForce ''
+            #           # Set up applications.
+            #           echo "setting up /Applications..." >&2
+            #           rm -rf /Applications/Nix\ Apps
+            #           mkdir -p /Applications/Nix\ Apps
+            # find ${env}/Applications -maxdepth 1 -type l -exec readlink '{}' + |
+            # while IFS= read -r src; do
+            #   app_name=$(basename "$src")
+            #   echo "Copying $src" >&2
+            #   ${pkgs.mkalias}/bin/mkalias "$src" "/Applications/Nix Apps/$app_name"
+            # done
+            #         '';
 
             # macOS system preferences
             system.defaults = {
@@ -85,10 +85,10 @@
                 "/Applications/VLC.app"
                 "/Applications/Spotify.app"
                 # "${pkgs.alacritty}/Applications/Alacritty.app"
-                "/Applications/Wezterm.app"
+                "/Applications/WezTerm.app"
                 "/Applications/Xcode.app"
                 "/Applications/PyCharm.app"
-                "/Applications/Google Chrome.app"
+                "/Applications/Zen.app"
               ];
               finder.FXPreferredViewStyle = "clmv"; # column view
               loginwindow.GuestEnabled = false;
@@ -109,9 +109,9 @@
               stow
               gnupg
               atuin
-              bc 
-              coreutils 
-              jq 
+              bc
+              coreutils
+              jq
               # alacritty
               # mkalias
             ];
@@ -122,12 +122,11 @@
                 "node"
               ];
               casks = [
-                "google-chrome"
+                "zen"
+                "nikitabobko/tap/aerospace"
                 "spotify"
                 "docker"
                 "pycharm"
-                "alt-tab"
-                "betterdisplay"
                 "whatsapp"
                 "obsidian"
                 "karabiner-elements"
