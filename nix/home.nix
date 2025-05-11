@@ -17,18 +17,6 @@ in
     stateVersion = "24.05";
 
     packages = with pkgs; [
-      bat
-      ripgrep
-      fzf
-      starship
-      eza
-      zoxide
-      neovim
-      tmux
-      zsh
-      stow
-      gnupg
-      atuin
     ];
 
   };

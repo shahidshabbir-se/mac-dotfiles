@@ -3,6 +3,7 @@
   "LuaSnip": { "branch": "master", "commit": "c9b9a22904c97d0eb69ccb9bab76037838326817" },
   "NvChad": { "branch": "v2.5", "commit": "6f25b2739684389ca69ea8229386c098c566c408" },
   "SchemaStore.nvim": { "branch": "main", "commit": "acf16353b88d9ebf8ab69e7fd42522bbb277e0ba" },
+  "aura-theme": { "branch": "feat/neovim-port", "commit": "c607be79c8eeaa5a5d7ac66421f8b5c51d936fe8" },
   "auto-save.nvim": { "branch": "main", "commit": "29f793a3a7f98129387590269ffe3ad61ab5e509" },
   "auto-session": { "branch": "main", "commit": "9c3f977aafb56bd73ba0d082c4dcbdba5666faf3" },
   "base46": { "branch": "v3.0", "commit": "80358ecdb5779b199130ed03031c34c0c2bca3fc" },

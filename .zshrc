@@ -1,3 +1,10 @@
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
 # --------------------#
 #      Exports        #
 # --------------------#
@@ -5,7 +12,7 @@ export EDITOR='nvim'
 export SUDO_PROMPT="Deploying root access for %u. Password pls: "
 export PATH=$PATH:/home/shahid/.spicetify
 export NVM_DIR="$HOME/.nvm"
-export PATH="/etc/profiles/per-user/shahid/bin:$PATH"
+export PATH="/run/current-system/sw/bin:$PATH"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
 
@@ -23,13 +30,13 @@ source "${ZINIT_HOME}/zinit.zsh"
 zinit snippet OMZL::git.zsh
 zinit snippet OMZP::git
 zinit snippet OMZP::sudo
-zinit snippet OMZP::archlinux
 zinit snippet OMZP::command-not-found
 plugins=(
   zdharma-continuum/fast-syntax-highlighting
   zsh-users/zsh-completions
   zsh-users/zsh-autosuggestions
   Aloxaf/fzf-tab
+  romkatv/powerlevel10k
 )
 for plugin in "${plugins[@]}"; do
   zinit ice depth"1"
@@ -70,19 +77,6 @@ setopt hist_ignore_dups
 setopt hist_find_no_dups
 
 # --------------------#
-#    The Prompt & Style #
-# --------------------#
-function dir_icon {
-  if [[ "$PWD" == "$HOME" ]]; then
-    echo "%B%F{cyan}%f%b"
-  else
-    echo "%B%F{cyan}%f%b"
-  fi
-}
-
-PS1='%B%F{blue}%f%b  %B%F{magenta}%n%f%b $(dir_icon)  %B%F{red}%~%f%b${vcs_info_msg_0_} %(?.%B%F{green}.%F{red})%f%b '
-
-# --------------------#
 #      Options        #
 # --------------------#
 setopt AUTOCD              # change directory just by typing its name
@@ -109,7 +103,6 @@ bindkey '^D' delete-char
 bindkey '^?' backward-delete-char
 bindkey '^T' transpose-chars
 bindkey '^[t' transpose-words
-bindkey '^L' clear-screen
 bindkey '^Y' yank
 bindkey '^[o' execute-named-cmd
 bindkey '^F' autosuggest-accept
@@ -122,6 +115,7 @@ alias update="paru -Syu --nocombinedupgrade"
 alias grub-update="sudo grub-mkconfig -o /boot/grub/grub.cfg"
 
 alias music="ncmpcpp"
+alias bc="better-commits"
 alias cat="bat --theme=base16"
 alias ls='eza --icons=always --color=always -a'
 alias ll='eza --icons=always --color=always -la'
@@ -203,15 +197,5 @@ extract() {
   fi
 }
 
-# >>> mamba initialize >>>
-# !! Contents within this block are managed by 'micromamba shell init' !!
-export MAMBA_EXE='/usr/bin/micromamba';
-export MAMBA_ROOT_PREFIX='/home/shahid/.local/share/mamba';
-__mamba_setup="$("$MAMBA_EXE" shell hook --shell zsh --root-prefix "$MAMBA_ROOT_PREFIX" 2> /dev/null)"
-if [ $? -eq 0 ]; then
-    eval "$__mamba_setup"
-else
-    alias micromamba="$MAMBA_EXE"  # Fallback on help from micromamba activate
-fi
-unset __mamba_setup
-# <<< mamba initialize <<<
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
