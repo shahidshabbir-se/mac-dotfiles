@@ -44,6 +44,7 @@
 
             fonts.packages = [
               pkgs.nerd-fonts.jetbrains-mono
+              pkgs.nerd-fonts.geist-mono
             ];
 
             #         system.activationScripts.applications.text = let
@@ -87,7 +88,6 @@
                 # "${pkgs.alacritty}/Applications/Alacritty.app"
                 "/Applications/WezTerm.app"
                 "/Applications/Xcode.app"
-                "/Applications/PyCharm.app"
                 "/Applications/Zen.app"
               ];
               finder.FXPreferredViewStyle = "clmv"; # column view
@@ -101,6 +101,7 @@
               tmux
               bat
               ripgrep
+              browserpass
               fzf
               eza
               zoxide
@@ -112,6 +113,7 @@
               bc
               coreutils
               jq
+              yazi
               # alacritty
               # mkalias
             ];
@@ -120,18 +122,27 @@
               enable = true;
               brews = [
                 "node"
+                "go"
+                "git-graph"
+                "sqlc"
+                "lazygit"
+                "golang-migrate"
+                "podman"
+                "ncdu"
               ];
               casks = [
-                "zen"
+                "qbittorrent"
+                "google-chrome"
                 "nikitabobko/tap/aerospace"
                 "spotify"
                 "docker"
-                "pycharm"
+                "maccy"
                 "whatsapp"
                 "obsidian"
                 "karabiner-elements"
                 "vlc"
                 "wezterm"
+                "zen"
               ];
               masApps = {
                 Xcode = 497799835;

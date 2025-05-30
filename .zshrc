@@ -11,6 +11,7 @@ fi
 export EDITOR='nvim'
 export SUDO_PROMPT="Deploying root access for %u. Password pls: "
 export PATH=$PATH:/home/shahid/.spicetify
+export PATH="$HOME/go/bin:$PATH"
 export NVM_DIR="$HOME/.nvm"
 export PATH="/run/current-system/sw/bin:$PATH"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
@@ -35,6 +36,7 @@ plugins=(
   zdharma-continuum/fast-syntax-highlighting
   zsh-users/zsh-completions
   zsh-users/zsh-autosuggestions
+  MichaelAquilina/zsh-you-should-use
   Aloxaf/fzf-tab
   romkatv/powerlevel10k
 )
@@ -122,7 +124,12 @@ alias ll='eza --icons=always --color=always -la'
 alias rm="rm -rf"
 alias c="clear"
 alias lt="eza --tree --level=2 --long --icons --git"
-alias ltree="eza --tree --level=2 --icons --git"
+alias lt3="eza --tree --level=3 --long --icons --git"
+alias lt4="eza --tree --level=4 --long --icons --git"
+alias mkdir="mkdir -p"
+man() {
+  command man "$@" | col -bx | bat --language=man --paging=always
+}
 alias v="nvim"
 alias ..="cd .."
 alias e="exit"
@@ -147,7 +154,7 @@ alias gre="git reset"
 alias ggr="git-graph --model git-flow"
 
 # LazyGit alias
-alias lzg="lazygit"
+alias lg="lazygit"
 
 # pnpm aliases
 alias pi="pnpm install"
@@ -157,6 +164,7 @@ alias ps="pnpm start"
 alias pt="pnpm test"
 
 # Docker aliases
+alias docker="podman"
 alias d="docker"
 alias dc="docker compose"
 alias dco="docker compose"
@@ -201,3 +209,16 @@ extract() {
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 export PATH=$PATH:/Users/shahid/.spicetify
+
+# >>> mamba initialize >>>
+# !! Contents within this block are managed by 'micromamba shell init' !!
+export MAMBA_EXE='/opt/homebrew/bin/micromamba';
+export MAMBA_ROOT_PREFIX='/Users/shahid/.local/share/mamba';
+__mamba_setup="$("$MAMBA_EXE" shell hook --shell zsh --root-prefix "$MAMBA_ROOT_PREFIX" 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__mamba_setup"
+else
+    alias micromamba="$MAMBA_EXE"  # Fallback on help from micromamba activate
+fi
+unset __mamba_setup
+# <<< mamba initialize <<<
