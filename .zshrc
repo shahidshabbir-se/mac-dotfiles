@@ -112,16 +112,14 @@ bindkey '^F' autosuggest-accept
 # --------------------#
 #      Aliases        #
 # --------------------#
-alias mirrors="sudo reflector --verbose --latest 5 --country 'United States' --age 6 --sort rate --save /etc/pacman.d/mirrorlist"
-alias update="paru -Syu --nocombinedupgrade"
-alias grub-update="sudo grub-mkconfig -o /boot/grub/grub.cfg"
-
-alias music="ncmpcpp"
+alias redis-cli='redli'
+alias killport='f(){ kill -9 $(lsof -ti tcp:$1); }; f'
 alias bc="better-commits"
 alias cat="bat --theme=base16"
 alias ls='eza --icons=always --color=always -a'
 alias ll='eza --icons=always --color=always -la'
 alias rm="rm -rf"
+alias copy="pbcopy"
 alias c="clear"
 alias lt="eza --tree --level=2 --long --icons --git"
 alias lt3="eza --tree --level=3 --long --icons --git"
@@ -133,7 +131,6 @@ man() {
 alias v="nvim"
 alias ..="cd .."
 alias e="exit"
-alias copy="xclip -selection clipboard"
 
 # Git aliases
 alias gs="git status"
@@ -164,7 +161,6 @@ alias ps="pnpm start"
 alias pt="pnpm test"
 
 # Docker aliases
-alias docker="podman"
 alias d="docker"
 alias dc="docker compose"
 alias dco="docker compose"
@@ -184,6 +180,9 @@ alias lzd="lazydocker"
 # --------------------#
 alias gcs="function _gitclone() { git clone git@github.com:shahidshabbir-se/\$1.git; }; _gitclone"
 alias gch="function _gch() { if [[ -n \$1 && \$1 =~ ^[0-9]+$ ]]; then git clone --depth \$1 \$2; else git clone \$1; fi; }; _gch"
+dip() {
+  dig +short A "$1"
+}
 extract() {
   if [ -f "$1" ]; then
     case "$1" in
@@ -207,6 +206,7 @@ extract() {
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+[ -f ~/.zsh_env_local ] && source ~/.zsh_env_local
 
 export PATH=$PATH:/Users/shahid/.spicetify
 
@@ -222,3 +222,8 @@ else
 fi
 unset __mamba_setup
 # <<< mamba initialize <<<
+# The following lines have been added by Docker Desktop to enable Docker CLI completions.
+fpath=(/Users/shahid/.docker/completions $fpath)
+autoload -Uz compinit
+compinit
+# End of Docker CLI completions

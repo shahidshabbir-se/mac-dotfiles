@@ -1,19 +1,7 @@
 return {
-  "sphamba/smear-cursor.nvim",
-  event = "VeryLazy",
-  cond = vim.g.neovide == nil,
+  "razak17/tailwind-fold.nvim",
+  ft = { "html", "templ", "svelte", "astro", "vue", "typescriptreact" },
   opts = {
-    hide_target_hack = true,
-    cursor_color = "none",
-  },
-  specs = {
-    -- disable mini.animate cursor
-    {
-      "echasnovski/mini.animate",
-      optional = true,
-      opts = {
-        cursor = { enable = false },
-      },
-    },
+    min_chars = 40,
   },
 }

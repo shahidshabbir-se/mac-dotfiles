@@ -13,13 +13,12 @@
   };
 
   outputs =
-    inputs@{
-      self,
-      nixpkgs,
-      nix-darwin,
-      home-manager,
-      nix-homebrew,
-      ...
+    inputs@{ self
+    , nixpkgs
+    , nix-darwin
+    , home-manager
+    , nix-homebrew
+    , ...
     }:
     let
       system = "aarch64-darwin";
@@ -40,6 +39,7 @@
             nixpkgs.hostPlatform = system;
             nixpkgs.config.allowUnfree = true;
 
+            system.primaryUser = username;
             users.users.${username}.home = "/Users/${username}";
 
             fonts.packages = [
@@ -81,14 +81,13 @@
                 "/Applications/Microsoft PowerPoint.app"
                 "/Applications/Microsoft Word.app"
                 "/Applications/WhatsApp.app"
-                "/Applications/Docker.app"
                 "/Applications/Obsidian.app"
                 "/Applications/VLC.app"
                 "/Applications/Spotify.app"
                 # "${pkgs.alacritty}/Applications/Alacritty.app"
                 "/Applications/WezTerm.app"
                 "/Applications/Xcode.app"
-                "/Applications/Zen.app"
+                "/Applications/Google Chrome.app"
               ];
               finder.FXPreferredViewStyle = "clmv"; # column view
               loginwindow.GuestEnabled = false;
@@ -120,6 +119,12 @@
 
             homebrew = {
               enable = true;
+
+              taps = [
+                "amar1729/formulae"
+                "nikitabobko/tap"
+              ];
+
               brews = [
                 "node"
                 "go"
@@ -127,26 +132,29 @@
                 "sqlc"
                 "lazygit"
                 "golang-migrate"
-                "podman"
                 "ncdu"
+                "browserpass"
+                "bitwarden-cli"
               ];
+
               casks = [
+                "aerospace"
                 "qbittorrent"
-                "google-chrome"
-                "nikitabobko/tap/aerospace"
-                "spotify"
-                "docker"
-                "maccy"
+                "orbstack"
+                "raycast"
                 "whatsapp"
                 "obsidian"
                 "karabiner-elements"
                 "vlc"
                 "wezterm"
-                "zen"
+                "spotify"
+                "google-chrome"
               ];
+
               masApps = {
                 Xcode = 497799835;
               };
+
               onActivation.cleanup = "zap";
             };
 

@@ -1,0 +1,3 @@
+^nix$
+.DS_Store
+^\.git$
