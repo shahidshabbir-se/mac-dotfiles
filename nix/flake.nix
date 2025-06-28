@@ -35,16 +35,20 @@
       darwinConfigurations.${hostname} = nix-darwin.lib.darwinSystem {
         inherit system;
         modules = [
+          ./modules/yabai.nix
+          ./modules/skhd.nix
           {
             nixpkgs.hostPlatform = system;
             nixpkgs.config.allowUnfree = true;
 
             system.primaryUser = username;
-            users.users.${username}.home = "/Users/${username}";
+            users.users.${username} = {
+              home = "/Users/${username}";
+              shell = pkgs.zsh;
+            };
 
             fonts.packages = [
-              pkgs.nerd-fonts.jetbrains-mono
-              pkgs.nerd-fonts.geist-mono
+              pkgs.nerd-fonts.blex-mono
             ];
 
             #         system.activationScripts.applications.text = let
@@ -87,7 +91,7 @@
                 # "${pkgs.alacritty}/Applications/Alacritty.app"
                 "/Applications/WezTerm.app"
                 "/Applications/Xcode.app"
-                "/Applications/Google Chrome.app"
+                "/Applications/Brave Brave.app"
               ];
               finder.FXPreferredViewStyle = "clmv"; # column view
               loginwindow.GuestEnabled = false;
@@ -97,22 +101,10 @@
             };
 
             environment.systemPackages = with pkgs; [
-              tmux
-              bat
-              ripgrep
               browserpass
-              fzf
-              eza
-              zoxide
-              neovim
-              zsh
-              stow
               gnupg
-              atuin
-              bc
-              coreutils
-              jq
-              yazi
+              yabai
+              skhd
               # alacritty
               # mkalias
             ];
@@ -148,7 +140,7 @@
                 "vlc"
                 "wezterm"
                 "spotify"
-                "google-chrome"
+                "brave-browser"
               ];
 
               masApps = {
@@ -163,7 +155,6 @@
               "flakes"
             ];
 
-            programs.zsh.enable = true;
             system.configurationRevision = self.rev or self.dirtyRev or null;
             system.stateVersion = 6;
           }
@@ -172,6 +163,7 @@
           {
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
+            home-manager.backupFileExtension = "bak";
             home-manager.users.${username} = import ./home.nix {
               inherit
                 pkgs
