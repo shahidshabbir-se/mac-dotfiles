@@ -22,10 +22,9 @@
       yabai -m rule --add app="^System Settings$" manage=off
       yabai -m rule --add app="^Finder$" manage=off
       yabai -m rule --add app="^Calculator$" manage=off
-      yabai -m rule --add app="^Brave Browser$" title!=".*Incognito.*" space=1
+      yabai -m rule --add app="^Firefox$" title!=".*Private.*" space=1
       yabai -m rule --add title=".*Private.*Inactive tab.*" space=9
       yabai -m rule --add app="^WezTerm$" space=2
-      yabai -m rule --add app="^Xcode$" space=3
       yabai -m rule --add app="^Spotify$" space=9
       yabai -m signal --add event=dock_did_restart action="sudo yabai --load-sa"
     '';

@@ -4,7 +4,7 @@ local lspkind = require("lspkind")
 -- Merge codicons with custom icons
 local icons = vim.tbl_extend("force", lspkind.presets.codicons, {
   Supermaven = "	",
-  Copilot = "",
+  Copilot = "",
 })
 
 cmp.setup({
@@ -15,16 +15,19 @@ cmp.setup({
   },
   window = {
     completion = cmp.config.window.bordered({
+      border = { "┌", "─", "┐", "│", "┘", "─", "└", "│" }, -- correct order!
       side_padding = 0,
       col_offset = 0,
       max_width = 63,
       max_height = 7,
       winhighlight = "Normal:Normal,FloatBorder:FloatBorder,CursorLine:PmenuSel,Search:None",
     }),
-    -- documentation = cmp.config.window.bordered({
-    --   max_width = 100,
-    --   max_height = 20,
-    -- }),
+    documentation = {
+      border = { "┌", "─", "┐", "│", "┘", "─", "└", "│" }, -- square border
+      winhighlight = "Normal:Normal,FloatBorder:FloatBorder",
+      max_width = 60,
+      max_height = 20,
+    },
   },
   mapping = cmp.mapping.preset.insert({
     ["<CR>"] = cmp.mapping.confirm({ select = true }),
@@ -33,45 +36,30 @@ cmp.setup({
   }),
   formatting = {
     format = function(entry, vim_item)
-      -- Inject custom kind for custom sources
-      if entry.source.name == "supermaven" then
-        vim_item.kind = "Supermaven"
-      elseif entry.source.name == "copilot" then
+      -- Inject custom kinds based on source
+      if entry.source.name == "copilot" then
         vim_item.kind = "Copilot"
+      elseif entry.source.name == "supermaven" then
+        vim_item.kind = "Supermaven"
       end
 
-      return lspkind.cmp_format({
-        mode = 'text_symbol',
-        preset = "codicons",
-        maxwidth = {
-          menu = 50,
-          abbr = 50,
-        },
-        show_labelDetails = true,
-        ellipsis_char = "...",
-        symbol_map = icons,
-        before = function(_, item)
-          local kind_text = item.kind
+      local kind = vim_item.kind
+      local icon = icons[kind] or ""
 
-          -- Inject padded icon
-          item.kind = "      " .. (icons[kind_text] or "")
+      vim_item.kind = icon .. " " .. kind
+      vim_item.kind_hl_group = "CmpItemKind" .. kind
+      vim_item.abbr_hl_group = "CmpItemAbbr"
+      vim_item.menu_hl_group = "CmpItemMenu"
 
-          -- Kind label on right
-          item.menu = kind_text
-
-          return item
-        end,
-      })(entry, vim_item)
+      return vim_item
     end,
   },
   sources = cmp.config.sources({
-    { name = "nvim_lsp" },
     { name = "luasnip" },
-    { name = "supermaven" },
-    -- { name = "copilot", group_index = 2 },
+    { name = "nvim_lsp" },
+    -- { name = "supermaven" },
+    { name = "copilot", group_index = 2 },
   }, {
     { name = "buffer" },
   }),
 })
-
-vim.api.nvim_set_hl(0, "CmpItemKindSupermaven", { fg = "#a6e3a1", bold = true })

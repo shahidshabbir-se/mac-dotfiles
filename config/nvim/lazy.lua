@@ -36,4 +36,8 @@ require("lazy").setup({
     notify = true,
     frequency = 3600 * 24 * 7,
   },
+  change_detection = {
+    enabled = true,
+    notify = false,
+  }
 })

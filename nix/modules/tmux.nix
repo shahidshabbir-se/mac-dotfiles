@@ -78,6 +78,12 @@ in
     set -g @tokyo-night-tmux_window_tidy_icons 0
     set -g @tokyo-night-tmux_transparent 1
 
+    set -g @vim_navigator_mapping_left "C-Left C-h"  # use C-h and C-Left
+    set -g @vim_navigator_mapping_right "C-Right C-l"
+    set -g @vim_navigator_mapping_up "C-k"
+    set -g @vim_navigator_mapping_down "C-j"
+    set -g @vim_navigator_mapping_prev ""
+
     run-shell ${tokyo-night}/share/tmux-plugins/tokyo-night/tokyo-night.tmux
 
     # set vi-mode
@@ -97,7 +103,7 @@ in
     set -g default-command "${pkgs.zsh}/bin/zsh"
 
     
-    set -as terminal-overrides ',alacritty:RGB'
+    set -as terminal-overrides ',wezterm:RGB'
     set -as terminal-features ",xterm-256color:RGB"
   '';
 }

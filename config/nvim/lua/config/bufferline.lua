@@ -44,5 +44,24 @@ bufferline.setup({
       },
     },
   },
+  highlights = {
+    fill = {
+      bg = "#1e1e2e", -- background behind bufferline
+    },
+    background = {
+      fg = "#6c7086", -- dimmed foreground for inactive buffers
+      bg = "#1e1e2e", -- background color for inactive buffers
+    },
+    buffer_selected = {
+      fg = "#cdd6f4", -- normal bright text for active buffer
+      bg = "#1e1e2e",
+      bold = true,
+      italic = false,
+    },
+    buffer_visible = {
+      fg = "#a6adc8", -- visible but not active
+      bg = "#1e1e2e",
+    },
+  },
   -- highlights = require("catppuccin.groups.integrations.bufferline").get(), -- optional
 })

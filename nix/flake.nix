@@ -91,7 +91,7 @@
                 # "${pkgs.alacritty}/Applications/Alacritty.app"
                 "/Applications/WezTerm.app"
                 "/Applications/Xcode.app"
-                "/Applications/Brave Brave.app"
+                "/Applications/Firefox.app"
               ];
               finder.FXPreferredViewStyle = "clmv"; # column view
               loginwindow.GuestEnabled = false;
@@ -105,6 +105,9 @@
               gnupg
               yabai
               skhd
+              minikube
+              kubectl
+              tailscale
               # alacritty
               # mkalias
             ];
@@ -114,7 +117,6 @@
 
               taps = [
                 "amar1729/formulae"
-                "nikitabobko/tap"
               ];
 
               brews = [
@@ -130,21 +132,24 @@
               ];
 
               casks = [
-                "aerospace"
+                "openvpn-connect"
                 "qbittorrent"
-                "orbstack"
+                "docker-desktop"
+                "tailscale"
                 "raycast"
                 "whatsapp"
                 "obsidian"
                 "karabiner-elements"
+                "anythingllm"
                 "vlc"
                 "wezterm"
                 "spotify"
-                "brave-browser"
+                "firefox"
               ];
 
               masApps = {
                 Xcode = 497799835;
+                # LocalSend = 1661733229;
               };
 
               onActivation.cleanup = "zap";

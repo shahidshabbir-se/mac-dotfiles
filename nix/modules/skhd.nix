@@ -26,11 +26,11 @@
       #       APPLICATION BINDS       #
       #################################
 
-      cmd - b : open -na "Brave Browser" && yabai -m space --focus 1
-      cmd + shift - b : open -na "Brave Browser" --args --incognito && yabai -m space --focus 9
-      cmd - m : open -na "Spotify" && yabai -m space --focus 9
-      cmd - return : open -na "Wezterm" && yabai -m space --focus 2
-      cmd - x : open -na "Xcode" && yabai -m space --focus 3
+      cmd - b : yabai -m space --focus 1; open -na "Firefox"
+      cmd + shift - b : yabai -m space --focus 9; open -na "Firefox" --args --private-window
+      cmd - m : yabai -m space --focus 9; open -na "Spotify"
+      cmd - return : yabai -m space --focus 2; open -na "Wezterm"
+      cmd + shift - l : yabai -m space --focus 3; open -na "AnythingLLM"
       cmd - q : yabai -m window --close
 
       #################################
